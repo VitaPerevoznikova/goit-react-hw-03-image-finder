@@ -5,7 +5,7 @@ export default class SearchBar extends Component {
 
   render(){
     return(
-    <Header >
+    <Header>
   <form className="SearchForm">
     <button type="submit" className="SearchForm-button">
       <span className="SearchForm-button-label">Search</span>
