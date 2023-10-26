@@ -1,11 +1,14 @@
 
-import { ButtonLM } from "./Button.styled.js";
+import { ButtonLoad } from "./Button.styled.js";
 
-export const Button = ({type="button"}) =>{
-  return(
-           <ButtonLM type={type}>
-            Load More
-           </ButtonLM>
-        );
-    
+const Button = ({ onClick }) => {
+  return (
+    <div>
+      <ButtonLoad type="button" onClick={onClick}>
+        Load more
+      </ButtonLoad>
+    </div>
+  );
 };
+
+export default Button;
