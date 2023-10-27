@@ -25,6 +25,7 @@ export class App extends Component {
     showModal: false,
     largeImageURL: '',
     tags: '',
+    initialSearchCompleted: false,
   };
 
   componentDidUpdate(_, prevState) {
@@ -39,7 +40,7 @@ export class App extends Component {
   }
 
   renderGallery = async () => {
-    const { searchName, page } = this.state;
+    const { searchName, page, initialSearchCompleted } = this.state;
     this.setState({ isLoading: true });
   
     try {
@@ -49,10 +50,11 @@ export class App extends Component {
         Notiflix.Notify.warning(
           'Sorry, there are no images matching your search query. Please try again.'
         );
-      } else {
+      } else if (!initialSearchCompleted) { 
         Notiflix.Notify.success(
           `Successfully found ${totalHits} images matching your search query.`
         );
+        this.setState({ initialSearchCompleted: true });
       }
   
       const newImages = needValues(hits);
