@@ -5,7 +5,7 @@ import { fetchImages, needValues } from './api/api';
 
 import SearchBar from './SearchBar/SearchBar';
 
-import {ImageGallery} from './ImageGallery/ImageGallery';
+import { ImageGallery } from './ImageGallery/ImageGallery';
 
 import Button from './Button/Button';
 
@@ -19,13 +19,12 @@ export class App extends Component {
   state = {
     images: [],
     searchName: '',
-    page: 1, 
+    page: 1,
     error: null,
     isLoading: false,
     showModal: false,
     largeImageURL: '',
     tags: '',
-    initialSearchCompleted: false,
   };
 
   componentDidUpdate(_, prevState) {
@@ -40,32 +39,32 @@ export class App extends Component {
   }
 
   renderGallery = async () => {
-    const { searchName, page, initialSearchCompleted } = this.state;
+    const { searchName, page } = this.state;
     this.setState({ isLoading: true });
-  
+
     try {
       const { hits, totalHits } = await fetchImages(searchName, page);
-  
+
       if (totalHits === 0) {
         Notiflix.Notify.warning(
           'Sorry, there are no images matching your search query. Please try again.'
         );
-      } else if (!initialSearchCompleted) { 
+      } else if (page === 1) {
         Notiflix.Notify.success(
           `Successfully found ${totalHits} images matching your search query.`
         );
-        this.setState({ initialSearchCompleted: true });
       }
-  
       const newImages = needValues(hits);
-  
+
       this.setState(({ images }) => ({
         images: [...images, ...newImages],
         totalHits,
       }));
+      
     } catch (error) {
       this.setState({ error });
       Notiflix.Notify.failure('Oops... Something went wrong');
+    
     } finally {
       this.setState({ isLoading: false });
     }
@@ -96,9 +95,7 @@ export class App extends Component {
   };
 
   render() {
-    
-
-    const { images, isLoading, totalHits, largeImageURL, tags, showModal,} =
+    const { images, isLoading, totalHits, largeImageURL, tags, showModal } =
       this.state;
     const allImages = images.length === totalHits;
 
@@ -106,14 +103,14 @@ export class App extends Component {
       <>
         <SearchBar onSubmit={this.onFormSubmit} />
 
-          <ImageGallery images={images} onOpenModal={this.openModal}/>
-      
-          {isLoading && <Loader />}
-          {images.length !== 0 && !isLoading && !allImages && (
+        <ImageGallery images={images} onOpenModal={this.openModal} />
+
+        {isLoading && <Loader />}
+        {images.length !== 0 && !isLoading && !allImages && (
           <Button onClick={this.onLoadMore} />
         )}
-       
-          {showModal && (
+
+        {showModal && (
           <Modal
             onModalClick={this.toggleModal}
             largeImage={largeImageURL}
