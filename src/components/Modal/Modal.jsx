@@ -1,47 +1,43 @@
 import { Component } from 'react';
-import { StyledModal } from './Modal.styled';
+import PropTypes from 'prop-types';
+import { Overlay, ModalWindow } from './Modal.styled';
 
-const modalRoot = document.querySelector('#modal-root');
-
-class Modal extends Component {
- 
+export class Modal extends Component {
   componentDidMount() {
-    window.addEventListener('keydown', this.handleKeyDown); 
-    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', this.onKeyDown);
   }
 
-  // Метод жизненного цикла: вызывается перед размонтированием компонента
-  componentWillUnmount() {
-    window.removeEventListener('keydown', this.handleKeyDown); 
-    document.body.style.overflow = 'visible';
-  }
-
-  // Обработчик события нажатия клавиши
-  handleKeyDown = event => {
-    if (event.code === 'Escape') {
-      this.props.onClose(); 
+  onKeyDown = e => {
+    if (e.code === 'Escape') {
+      this.props.onModalClick();
     }
   };
 
-  // Обработчик клика по фону модального окна
-  handleBackdropClick = event => {
-    if (event.currentTarget === event.target) {
-      this.props.onClose();
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onKeyDown);
+  }
+
+  onBackDropClick = e => {
+    if (e.target === e.currentTarget) {
+      this.props.onModalClick();
     }
   };
 
   render() {
-    const { largeImageURL, tags } = this.props; 
+    const { largeImage, alt } = this.props;
 
-    return(
-      <StyledModal>
-        <Modal>
-          <img src={largeImageURL} alt={tags} />
-        </Modal>
-      </StyledModal>,
-      modalRoot 
+    return (
+      <Overlay onClick={this.onBackDropClick}>
+        <ModalWindow>
+          <img src={largeImage} alt={alt} />
+        </ModalWindow>
+      </Overlay>
     );
   }
 }
-export default Modal;
 
+Modal.propTypes = {
+  alt: PropTypes.string.isRequired,
+  largeImage: PropTypes.string.isRequired,
+  onModalClick: PropTypes.func.isRequired,
+};

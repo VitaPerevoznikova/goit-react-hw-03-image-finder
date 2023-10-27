@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Item = styled.li`
+export const ItemCard = styled.li`
   border-radius: 16px;
   border: 2px solid rgba(185, 228, 201, 0.5);
   overflow: hidden;
