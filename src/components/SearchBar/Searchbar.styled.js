@@ -32,16 +32,22 @@ export const Header = styled.header`
        overflow: hidden;
      }
      
-     .SearchForm-button {
-       display: inline-block;
-       width: 48px;
-       height: 48px;
-       border: 0;
-       opacity: 0.6;
-       transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
-       cursor: pointer;
-       outline: none;
-     }
+    //  .SearchForm-button {
+    //   display: inline-block;
+    //   width: 48px;
+    //   height: 48px;
+    //   border: 0;
+    //   background-size: 40%;
+    //   background-repeat: no-repeat;
+    //   background-position: center;
+    //   opacity: 0.6;
+    //   transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    //   cursor: pointer;
+    //   outline: none;
+    //   :hover {
+    //     opacity: 1;
+    //   } 
+    //  }
      
      .SearchForm-button:hover {
        opacity: 1;
@@ -77,4 +83,22 @@ export const Header = styled.header`
         
 
 `
+export const SearchFormButton = styled.button`
+display: 'flex';
+justifyContent: 'center';
+alignItems: 'center';
+  width: 48px;
+  height: 48px;
+  border: 0;
+  background-size: 40%;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.6;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  outline: none;
+  :hover {
+    opacity: 1;
+  }
+`;
 

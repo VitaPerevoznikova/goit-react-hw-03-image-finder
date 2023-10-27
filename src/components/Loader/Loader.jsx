@@ -1,20 +1,20 @@
 import React from "react";
-import { Audio } from  'react-loader-spinner';
+import { ThreeDots  } from  'react-loader-spinner';
 import { LodeWrapper } from "./Loader.styled";
 
 const Loader = () => {
     return(
     <LodeWrapper>
-     <Audio
-    height = "80"
-    width = "80"
-    radius = "9"
-    color = 'green'
-    ariaLabel = 'three-dots-loading'     
-    wrapperStyle={{}}
-    wrapperClassName=''
-    visible={true}
-  />   
+  <ThreeDots 
+height="80" 
+width="80" 
+radius="9"
+color="#3f51b5" 
+ariaLabel="three-dots-loading"
+wrapperStyle={{}}
+wrapperClassName=""
+visible={true}
+ />
   </LodeWrapper>
     )
 }

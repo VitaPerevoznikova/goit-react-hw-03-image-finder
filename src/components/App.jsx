@@ -41,17 +41,22 @@ export class App extends Component {
   renderGallery = async () => {
     const { searchName, page } = this.state;
     this.setState({ isLoading: true });
-
+  
     try {
       const { hits, totalHits } = await fetchImages(searchName, page);
-
+  
       if (totalHits === 0) {
-        Notiflix.Notify.failure(
+        Notiflix.Notify.warning(
           'Sorry, there are no images matching your search query. Please try again.'
         );
+      } else {
+        Notiflix.Notify.success(
+          `Successfully found ${totalHits} images matching your search query.`
+        );
       }
+  
       const newImages = needValues(hits);
-
+  
       this.setState(({ images }) => ({
         images: [...images, ...newImages],
         totalHits,

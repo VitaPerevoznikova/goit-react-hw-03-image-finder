@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import PropTypes from 'prop-types';
 import Notiflix from 'notiflix';
-import { Header } from './Searchbar.styled';
+import { BiSearchAlt  } from "react-icons/bi";
+import { Header,SearchFormButton } from './Searchbar.styled';
 
  class SearchBar extends Component {
   state = {
@@ -31,9 +32,10 @@ import { Header } from './Searchbar.styled';
     return (
       <Header>
         <form onSubmit={this.handleSubmit} className="SearchForm">
-          <button type="submit" className="SearchForm-button">
-            <span className="SearchForm-button-label">Search</span>
-          </button>
+          <SearchFormButton type="submit" className="SearchForm-button">
+            {/* <span className="SearchForm-button-label">Search</span>  */}
+            <BiSearchAlt style={{ width: 25, height: 25 }} />
+          </SearchFormButton>
           <input
             className="SearchForm-input"
             type="text"

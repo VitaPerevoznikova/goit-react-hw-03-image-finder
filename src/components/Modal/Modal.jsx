@@ -29,7 +29,7 @@ export class Modal extends Component {
     return (
       <Overlay onClick={this.onBackDropClick}>
         <ModalWindow>
-          <img src={largeImage} alt={alt} />
+          <img src={largeImage} alt={alt}/>
         </ModalWindow>
       </Overlay>
     );
