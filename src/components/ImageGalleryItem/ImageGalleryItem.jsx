@@ -1,27 +1,21 @@
-import { Component } from "react";
-import Modal from "../Modal/Modal";
-import {Item,Picture } from "./ImageGalleryItem.styled";
+import PropTypes from 'prop-types';
+import {ItemCard,Picture } from "./ImageGalleryItem.styled";
 
-export class ImageGalleryItem extends Component {
-    state = {
-      showModal: false,
-    };
+export const ImageGalleryItem = ({ url, tag, openModal, largeImageURL }) => {
+  return (
+    <ItemCard>
+      <Picture
+        src={url}
+        alt={tag}
+        onClick={() => openModal(largeImageURL, tag)}
+      />
+    </ItemCard>
+  );
+};
 
-    render() {
-      const { image } = this.props;
-  
-      return (
-        <Item>
-          <Picture
-            src={image.webformatURL}
-            alt={image.tags}
-            onClick={this.toggleModal} 
-          />
-          {this.state.showModal && (
-            <Modal/>
-          )}
-        </Item>
-      );
-    }
-}
-export default ImageGalleryItem;
+ImageGalleryItem.prototype = {
+  url: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
+  largeImageURL: PropTypes.string.isRequired,
+  openModal: PropTypes.func.isRequired,
+};
